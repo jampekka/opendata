@@ -71,7 +71,9 @@ class Px(object):
         Parses metadata keywords from px_doc and inserts those into self object
         Returns the data part
         """
-        meta, data = open(px_doc, 'U').read().split("DATA=")
+        if isinstance(px_doc, basestring):
+	        px_doc = open(px_doc, 'U')
+        meta, data = px_doc.read().split("DATA=")
         meta = unicode(meta, 'iso-8859-1')
         data = unicode(data, 'iso-8859-1')
         nmeta = {}
